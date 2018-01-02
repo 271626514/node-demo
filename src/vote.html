@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>投票</title>
+    <style>
+        .btn { margin: 20px 0;}
+        button { width: 120px; height: 30px; border: cornflowerblue; background: cornflowerblue;font-size: 30px; color: #FFF; font-weight: bold;text-align: center; line-height: 30px; cursor: pointer}
+    </style>
+</head>
+<body>
+<form action="">
+    <div class="btn">
+        <button id="btn1" data-id="1"> + </button> NO.1
+    </div>
+    <div class="btn">
+        <button id="btn2" data-id="2"> + </button> NO.2
+    </div>
+    <div class="btn">
+        <button id="btn3" data-id="3"> + </button> NO.3
+    </div>
+</form>
+<script src="https://cdn.bootcss.com/jquery/1.10.0/jquery.min.js"></script>
+<script src="http://192.168.1.105:9919/socket.io/socket.io.js"></script>
+<script>
+    $(function(){
+        var socket_count = io.connect("http://192.168.1.105:9919/count");
+        $('button').on('click', function(e) {
+            e.preventDefault();
+            var _this = $(this),
+                index = _this.data('id')
+            socket_count.emit("acount", {id:index})
+        })
+        socket_count.on('addCount', addCount)
+    })
+</script>
+</body>
+</html>
