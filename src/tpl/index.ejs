@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0,minimum-scale=1, maximum-scale=1, user-scalable=no">
-    <title>Title</title>
+    <title>hello ejs</title>
 </head>
 <body>
 <img src="./images/car_advert_left_bg.png" />
@@ -21,21 +21,15 @@
 </div>
 </body>
 <script src="https://cdn.bootcss.com/jquery/1.10.0/jquery.min.js"></script>
-<script src="http://127.0.0.1:9919/socket.io/socket.io.js"></script>
 <script>
-    $(function(){
-        var socket_count = io.connect("http://127.0.0.1:9919/count");
-        var socket_init = io.connect("http://127.0.0.1:9919/init");
-        socket_init.on('data', function (res) {
-            console.log(res.msg)
-        });
-        function addCount (data) {
-            var index = data,
-                dom = $('.count').eq(index-1).find('span'),
-                value = parseInt(dom.text())
-            dom.text(value+1)
-        }
-        socket_count.on('addCount', addCount)
+    $(function () {
+        $.ajax({
+            url: '//127.0.0.1:9918/api/getTime',
+            type: 'get',
+            success: function (res) {
+                console.log(res);
+            }
+        })
     })
 </script>
 </html>
