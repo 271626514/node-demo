@@ -1,22 +1,28 @@
 /**
  * Created by syzx9801@163.com on 2017/12/29.
  */
-const koa = require('koa'),
+const path = require('path'),
+  koa = require('koa'),
   server = require('http').Server(koa),
   io = require("socket.io")(server),
   app = new koa(),
-  router = require('koa-route'),
+  route = require('./route'),
+  middleware = require('./middleware'),
   serve = require('koa-static'),
-  route = require('./route');
+  compose = require('koa-compose'),
+  koaStatic = serve(path.join(__dirname) + '/src');
 
-app.use(router.get('/', route.lottery));
-app.use(router.get('/vote', route.vote));
+app.use(koaStatic);
+app.use(middleware.getCookie);
+app.use(route.index);
+app.use(route.vote);
+app.use(route.test);
 
-app.listen(9918, '192.168.1.105');
-server.listen(9919, '192.168.1.105');
+app.listen(9918, '127.0.0.1');
+server.listen(9919, '127.0.0.1');
 
 io.of('/init').on('connection', client => {
-  console.log(`连接成功`)
+  // console.log(`连接成功`)
   let msg = {
     'code': 200,
     'msg': '这是一条服务端推送'
