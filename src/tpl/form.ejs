@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ZH-cn">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+  <form action="//127.0.0.1:9918/api/login" method="post">
+    username: <input type="text" name="name" />
+    password: <input type="password" name="pwd" />
+    <button>submit</button>
+  </form>
+  <script src="https://cdn.bootcss.com/jquery/1.10.0/jquery.min.js"></script>
+  <script>
+    $(function(){
+      $.ajax({
+        url: '//127.0.0.1:9918/api/login',
+        type: 'post',
+        data: {
+          name: 'qkqk',
+          pwd: '123123'
+        },
+        success: function(res){
+          console.log(res)
+        },
+        error: function(err){
+          console.log(err)
+        }
+      });
+    })
+  </script>
+</body>
+</html>
