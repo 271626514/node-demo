@@ -6,6 +6,7 @@ const koa = require('koa'),
   io = require("socket.io")(server),
   app = new koa(),
   router = require('koa-route'),
+  serve = require('koa-static'),
   route = require('./route');
 
 app.use(router.get('/', route.lottery));
