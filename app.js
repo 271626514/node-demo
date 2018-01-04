@@ -18,11 +18,12 @@ render(app, {
   debug: true
 });
 
-
-app.use(middleware.getCookie);
-app.use(route.router.routes());
-app.use(api.router.routes());
 app.use(serve(path.join(__dirname) + '/src'));
+app.use(middleware.getCookie);
+
+app.use(route.router.routes());
+app.use(api.api.routes());
+
 
 app.listen(9918);
 
