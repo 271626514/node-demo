@@ -26,9 +26,13 @@
         $.ajax({
             url: '//127.0.0.1:9918/api/getTime',
             type: 'get',
-            success: function (res) {
-                console.log(res);
-            }
+        }).then(function(res){
+            $.ajax({
+                url: '//127.0.0.1:9918/api/getTime/'+res.msg,
+                error: function(){
+
+                }
+            })
         })
     })
 </script>

@@ -10,6 +10,10 @@ const router = new Router({
     ctx.response.type = 'json';
     ctx.response.body = {"code":"200","msg":new Date().getTime()};
   })
+  .post('/res', async ctx => {
+    ctx.response.type = 'json';
+    ctx.response.body = {}
+  })
 
 module.exports = {
   router
